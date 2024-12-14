@@ -63,7 +63,7 @@
 
 ## 🌈 接口文档
 
-- `apifox`  在线接口文档：[https://www.apifox.cn/apidoc](https://www.apifox.cn/apidoc/shared-195e783f-4d85-4235-a038-eec696de4ea5)
+- `apifox`  在线接口文档：[https://www.apifox.cn/apidoc](https://apifox.com/apidoc/shared-1e79237e-8496-47e0-a76f-4d8380c26ec6)
 
 
 
