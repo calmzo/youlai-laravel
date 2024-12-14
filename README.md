@@ -1,4 +1,20 @@
-
+<div align="center">
+   <img alt="logo" width="100" height="100" src="http://cdnwm.yuluojishu.com/uploads/20241214/a3f9203493822a56878bddf7b4a7e770.jpeg">
+   <h2>youlai-laravel</h2>
+   <img alt="Calm" src="https://img.shields.io/badge/PHP -8.0-brightgreen.svg"/>
+   <img alt="Calm" src="https://img.shields.io/badge/Laravel-10.48.25-green.svg"/>
+   <a href="https://gitee.com/Calm-Chan/youlai-laravel.git" target="_blank">
+     <img alt="Calm" src="https://gitee.com/Calm-Chan/youlai-laravel/badge/star.svg"/>
+   </a>     
+   <a href="https://github.com/calmzo" target="_blank">
+     <img alt="Calm" src="https://img.shields.io/github/stars/calmzo/youlai-laravel.svg?style=social&label=Stars"/>
+   </a>
+   <br/>
+   <img alt="Calm" src="https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg"/>
+   <a href="https://gitee.com/youlaiorg" target="_blank">
+     <img alt="Calm" src="https://img.shields.io/badge/Author-Calm-orange.svg"/>
+   </a>
+</div>
 
 ## 📢 项目简介
 
