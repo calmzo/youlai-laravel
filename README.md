@@ -2,7 +2,7 @@
 
 ## 📢 项目简介
 
-**在线预览**: [xx](xxx)
+**在线预览**: [https://apifox.com/apidoc/shared-1e79237e-8496-47e0-a76f-4d8380c26ec6](https://apifox.com/apidoc/shared-1e79237e-8496-47e0-a76f-4d8380c26ec6)
 
 基于 Laravel10、JWT、Redis、Vue 3、Element-Plus 构建的前后端分离单体权限管理系统。
 
@@ -52,6 +52,7 @@
 
 
 ## 🚀 项目启动
+
 1. **数据库初始化**
    
    执行 database下 [youlai_laravel.sql](database/mysql8/youlai_laravel.sql) 脚本完成数据库创建、表结构和基础数据的初始化。
