@@ -12,7 +12,7 @@ CREATE DATABASE IF NOT EXISTS youlai_boot DEFAULT CHARACTER SET utf8 DEFAULT COL
 -- ----------------------------
 -- 2. 创建表 && 数据初始化
 -- ----------------------------
-use youlai_boot;
+use youlai_laravel;
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
