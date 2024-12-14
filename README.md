@@ -1,21 +1,20 @@
-# 开发环境
-
-`PHP v8.0`  `MySQL 5.7.38` [Laravel v10](https://learnku.com/docs/laravel/10.x)
-
-# Api文档地址
 
 
-# 部署
+## 📢 项目简介
 
-## Nginx 伪静态
+**在线预览**: [xx](xxx)
 
-``` 
-location / {
-try_files $uri $uri/ /index.php?$query_string;
-}
-``` 
+基于 Laravel10、JWT、Redis、Vue 3、Element-Plus 构建的前后端分离单体权限管理系统。
 
-# 文件目录说明
+- **🚀 开发框架**: 使用 Laravel10 和 Vue 3，以及 Element-Plus 等主流技术栈，实时更新。
+
+- **🔐 安全认证**: JWT 提供安全、无状态、分布式友好的身份验证。
+
+- **🔑 权限管理**: 基于反射注解，实现权限控制，涵盖接口方法和按钮级别。
+
+- **🛠️ 功能模块**: 包括用户管理、角色管理、菜单管理、部门管理、字典管理等多个功能。
+
+## 项目目录
 
 ``` 
 +---Casts
@@ -39,79 +38,49 @@ try_files $uri $uri/ /index.php?$query_string;
 +---Utils
 ``` 
 
-# composer
 
-## composer
+## 🌺 前端工程
+| Gitee | Github |
+|-------|------|
+| [vue3-element-admin](https://gitee.com/youlaiorg/vue3-element-admin)  | [vue3-element-admin](https://github.com/youlaitech/vue3-element-admin)  |
 
-`composer install`
 
-# Laravel Artisan
+## 🌈 接口文档
 
-## 秘钥
+- `apifox`  在线接口文档：[https://www.apifox.cn/apidoc](https://www.apifox.cn/apidoc/shared-195e783f-4d85-4235-a038-eec696de4ea5)
 
-```
-php artisan key:generate
-```
 
-## jwt
+
+## 🚀 项目启动
+1. **数据库初始化**
+   
+   执行 database下 [youlai_laravel.sql](database/mysql8/youlai_laravel.sql) 脚本完成数据库创建、表结构和基础数据的初始化。
+
+2. **修改配置**
+
+   复制[.env.dev](.env.dev) 文件,新增 .env文件，修改MySQL、Redis连接配置；
+
+3. **启动项目**
+
+    nginx配置
+``` 
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}
+``` 
+
 ```shell
-php artisan jwt:secret
+composer install # 依赖包
+php artisan key:generate #秘钥
+php artisan jwt:secret #生成jwt密钥
 ```
 
-# 问题
-```markdown
-1、This password does not use the Bcrypt algorithm.
-使用非 Bcrypt 哈希值的密码，Hash:make 初始化user密码
-2、修改前端路由
-api/v1/auth/login 修改为 admin/auth/login
-
-```
-
-
-## 队列
-
-### 生成任务类
-
-### 运行队列
-
-### 任务ID 在命令行输出
-
-### 队列进程
-
-### 删除失败的任务
-
-#### 删除失败记录
-
-### 数据库
-
-#### 更新数据库
-
-`php artisan migrate`
-
-#### 数据库回滚迁移
-
-`php artisan migrate:refresh --seed`
-
-#### 数据库迁移文件
-
-#### 生成数据填文件
-
-`php artisan make:seeder UserSeeder`
-
-#### 数据填充
-
-`php artisan db:seed`
-
-### 生成路由缓存
-
-`php artisan route:cache`
-
-### 任务调度
-
-#### 查看任务计划的概述及其下次计划运行时间
-
-`php artisan schedule:list`
-
-#### 本地测试
-
-`php artisan schedule:work`
+4. **问题**
+   
+   1、This password does not use the Bcrypt algorithm.
+   
+   使用非 Bcrypt 哈希值的密码，Hash:make 初始化user密码
+   
+    2、修改前端路由
+   
+    api/v1/auth/login 修改为 admin/auth/login
