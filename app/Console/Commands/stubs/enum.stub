@@ -1,0 +1,24 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass extends BaseEnums
+{
+
+    const TYPE_FIRST = 1; // 类型一
+
+    /**
+     * @param null $key
+     * @return array|mixed|string
+     */
+    public static function typeMap($key = null)
+    {
+        $list = [
+            self::TYPE_FIRST => '类型一'
+
+        ];
+
+        return self::getDesc($list, $key);
+    }
+}
+
