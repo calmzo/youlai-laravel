@@ -7,7 +7,7 @@
 -- ----------------------------
 -- 1. 创建数据库
 -- ----------------------------
-CREATE DATABASE IF NOT EXISTS youlai_boot DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS youlai_laravel DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 
 -- ----------------------------
 -- 2. 创建表 && 数据初始化
