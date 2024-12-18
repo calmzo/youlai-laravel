@@ -31,6 +31,7 @@ Route::prefix('system')->group(function () {
         Route::post('login', [AuthController::class, 'login']);
         Route::delete('logout', [AuthController::class, 'logout']); //注销
         Route::get('captcha', [AuthController::class, 'getCaptcha']); //获取验证码
+        Route::post('refresh-token', [AuthController::class, 'refreshToken']); //刷新token
     });
 
     //用户管理

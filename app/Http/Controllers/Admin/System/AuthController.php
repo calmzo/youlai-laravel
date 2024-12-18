@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends BaseController
 {
-    protected $except = ['login', 'getCaptcha'];
+    protected $except = ['login', 'getCaptcha', 'refreshToken'];
 
     /**
      * @logAnnotation('系统登录','SYSTEM_LOGIN')
@@ -53,6 +53,7 @@ class AuthController extends BaseController
             return $this->fail(CodeResponse::USERNAME_OR_PASSWORD_ERROR, '账号和密码不正确');
         }
         $token = Auth::guard('admin')->login($user);
+        $refreshToken = Auth::guard('admin')->setTTL(env('JWT_REFRESH_TTL'))->login($user);
         //日志
 
 //        //mq方式一队列
@@ -75,8 +76,22 @@ class AuthController extends BaseController
 
         return $this->success([
             'accessToken'  => $token,
-            'expires'      => null,
-            'refreshToken' => null,
+            'expires'      => env('JWT_TTL'),
+            'refreshToken' => $refreshToken ?? '',
+            'tokenType'    => 'Bearer',
+        ]);
+    }
+
+    public function refreshToken()
+    {
+        $refreshToken = $this->verifyString('refreshToken');
+        \request()->headers->set('Authorization', 'Bearer ' . $refreshToken);
+        $expires = env('JWT_REFRESH_TTL');
+        $newAccessToken = Auth::guard('admin')->setTTL($expires)->login($this->user());
+        return $this->success([
+            'accessToken'  => $newAccessToken,
+            'expires'      => $expires,
+            'refreshToken' => $refreshToken,
             'tokenType'    => 'Bearer',
         ]);
     }
