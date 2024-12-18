@@ -202,4 +202,17 @@ class Helpers
             return $data;
         }
     }
+
+
+    public static function periodDate($startDate, $endDate)
+    {
+        $startTime = strtotime($startDate);
+        $endTime   = strtotime($endDate);
+        $arr       = [];
+        while ($startTime <= $endTime) {
+            $arr[]     = date('Y-m-d', $startTime);
+            $startTime = strtotime('+1 day', $startTime);
+        }
+        return $arr;
+    }
 }

@@ -25,4 +25,31 @@ class LogController extends BaseController
         return $this->successPaginate($paginate);
     }
 
+    /**
+     * 获取访问趋势
+     *
+     * @return array|\Illuminate\Http\JsonResponse
+     * @throws \App\Exceptions\BusinessException
+     * @author 2024/12/18 18:38
+     */
+    public function getVisitTrend()
+    {
+        $start = $this->verifyString('startDate');
+        $end = $this->verifyString('endDate');
+        $data = LogService::getInstance()->getVisitTrend($start, $end);
+        return $this->success($data);
+    }
+
+    /**
+     * 获取访问统计
+     *
+     * @return array|\Illuminate\Http\JsonResponse
+     * @author 2024/12/18 18:38
+     */
+    public function getVisitStats()
+    {
+        $data = LogService::getInstance()->getVisitStats();
+        return $this->success($data);
+    }
+
 }

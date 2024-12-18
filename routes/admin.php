@@ -140,6 +140,8 @@ Route::prefix('system')->group(function () {
     //日志
     Route::prefix('logs')->group(function () {
         Route::get('page', [LogController::class, 'listPagedLogs']); //日志分页列表
+        Route::get('visit-trend', [LogController::class, 'getVisitTrend']); //获取访问趋势
+        Route::get('visit-stats', [LogController::class, 'getVisitStats']); //获取访问统计
     });
 
 });
