@@ -18,7 +18,7 @@
 
 ## 📢 项目简介
 
-**在线预览**: [https://apifox.com/apidoc/shared-1e79237e-8496-47e0-a76f-4d8380c26ec6](https://apifox.com/apidoc/shared-1e79237e-8496-47e0-a76f-4d8380c26ec6)
+**在线预览**: [http://youlai.calmchen.com](http://youlai.calmchen.com)
 
 基于 Laravel10、JWT、Redis 构建的前后端分离单体权限管理系统。
 
