@@ -39,17 +39,17 @@ Route::prefix('system')->group(function () {
         Route::get('me', [SystemUserController::class, 'getCurrentUserInfo']);
         Route::get('page', [SystemUserController::class, 'listPagedUsers']); //用户列表
         Route::post('', [SystemUserController::class, 'saveUser']);
+        Route::get('profile', [SystemUserController::class, 'getUserProfile']); //获取个人中心用户信息
+        Route::put('profile', [SystemUserController::class, 'updateUserProfile']); //修改个人中心用户信息
+        Route::put('password', [SystemUserController::class, 'changePassword']); //修改用户密码
+        Route::post('import', [SystemUserController::class, 'importUsers']); //导入用户
         Route::put('{userId}', [SystemUserController::class, 'updateUser']);
         Route::patch('{userId}/password', [SystemUserController::class, 'updatePassword']); //修改用户密码 //todo 准备弃用
         Route::put('{userId}/password/reset', [SystemUserController::class, 'resetPassword']); //重置用户密码
-        Route::put('password', [SystemUserController::class, 'changePassword']); //修改用户密码
         Route::get('{userId}/form', [SystemUserController::class, 'getUserFormData']); //用户表单数据
-        Route::get('profile', [SystemUserController::class, 'getUserProfile']); //获取个人中心用户信息
-        Route::put('profile', [SystemUserController::class, 'updateUserProfile']); //修改个人中心用户信息
         Route::delete('{ids}', [SystemUserController::class, 'deleteUsers']); //删除用户ID，多个以英文逗号(,)分割
         Route::get('template', [SystemUserController::class, 'downloadTemplate']); //模板
         Route::get('export', [SystemUserController::class, 'exportUsers']); //导出用户
-        Route::post('import', [SystemUserController::class, 'importUsers']); //导入用户
         Route::get('options', [SystemUserController::class, 'listUserOptions']); //角色下拉列表
 
         Route::prefix('recycle')->group(function () {
