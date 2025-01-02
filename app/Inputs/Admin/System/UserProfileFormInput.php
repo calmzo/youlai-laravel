@@ -17,13 +17,8 @@ class UserProfileFormInput extends Input
     public function rule()
     {
         return [
-            'username'                   => 'string',
-            'nickname'                   => 'string',
-            'avatar'                   => 'string',
-            'gender'                   => 'integer',
-            'mobile'                   => 'string',
-            'email'                   => 'string',
-
+            'nickname' => 'string',
+            'gender'   => 'integer',
         ];
     }
 
