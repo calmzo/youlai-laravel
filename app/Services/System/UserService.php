@@ -254,10 +254,11 @@ class UserService extends BaseService
      * @throws \App\Exceptions\BusinessException
      * @author 2024/8/19 13:36
      */
-    public function getUserProfile($id)
+    public function getUserProfile()
     {
+        $userId = LoginService::getInstance()->userId();
         $column = ['id', 'username', 'nickname', 'mobile', 'gender', 'avatar', 'email', 'status', 'dept_id', 'create_time'];
-        $user   = User::query()->where('id', $id)->first($column);
+        $user   = User::query()->where('id', $userId)->first($column);
         if (is_null($user)) {
             //用户不存在
             $this->throwBusinessException();
@@ -278,8 +279,9 @@ class UserService extends BaseService
      * @throws \App\Exceptions\BusinessException
      * @author 2024/8/19 13:52
      */
-    public function updateUserProfile($userId, UserProfileFormInput $input)
+    public function updateUserProfile(UserProfileFormInput $input)
     {
+        $userId = LoginService::getInstance()->userId();
         $username = $input->username;
         $count    = User::query()->where('id', '<>', $userId)->where('username', $username)->count();
         if ($count > 0) {

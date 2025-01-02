@@ -137,14 +137,13 @@ class UserController extends BaseController
     /**
      * 获取个人中心用户信息
      *
-     * @param $userId
      * @return array|\Illuminate\Http\JsonResponse
      * @throws \App\Exceptions\BusinessException
      * @author 2024/8/19 13:36
      */
-    public function getUserProfile($userId)
+    public function getUserProfile()
     {
-        $list = UserService::getInstance()->getUserProfile($userId);
+        $list = UserService::getInstance()->getUserProfile();
         return $this->success($list);
 
     }
@@ -153,15 +152,14 @@ class UserController extends BaseController
     /**
      * 修改个人中心用户信息
      *
-     * @param $userId
      * @return array|\Illuminate\Http\JsonResponse
      * @throws \App\Exceptions\BusinessException
      * @author 2024/8/19 13:52
      */
-    public function updateUserProfile($userId)
+    public function updateUserProfile()
     {
         $input = UserProfileFormInput::new();
-        $res = UserService::getInstance()->updateUserProfile($userId, $input);
+        $res = UserService::getInstance()->updateUserProfile($input);
         return $this->success($res);
     }
 
