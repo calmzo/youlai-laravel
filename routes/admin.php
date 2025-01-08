@@ -43,6 +43,7 @@ Route::prefix('system')->group(function () {
         Route::put('profile', [SystemUserController::class, 'updateUserProfile']); //修改个人中心用户信息
         Route::put('password', [SystemUserController::class, 'changePassword']); //修改用户密码
         Route::post('import', [SystemUserController::class, 'importUsers']); //导入用户
+        Route::put('email', [SystemUserController::class, 'bindEmail']); //个人中心绑定用户邮箱
         Route::put('{userId}', [SystemUserController::class, 'updateUser']);
         Route::patch('{userId}/password', [SystemUserController::class, 'updatePassword']); //修改用户密码 //todo 准备弃用
         Route::put('{userId}/password/reset', [SystemUserController::class, 'resetPassword']); //重置用户密码

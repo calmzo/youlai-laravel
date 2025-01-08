@@ -2,6 +2,8 @@
 
 namespace App\Services\System;
 
+use App\Exceptions\BusinessException;
+use App\Inputs\Admin\System\EmailBindingFormInput;
 use App\Inputs\Admin\System\PasswordChangeFormInput;
 use App\Inputs\Admin\System\UserFormInput;
 use App\Inputs\Admin\System\UserPageInput;
@@ -11,8 +13,8 @@ use App\Lib\Excel\Import\UserImport;
 use App\Models\System\SysUser as User;
 use App\Services\BaseService;
 use App\Tools\Helpers;
-use App\Utils\{CodeResponse, Constant, ConstantEnum, Helper};
-use Illuminate\Support\Facades\{Hash};
+use App\Utils\{CodeResponse, Constant, ConstantEnum, Helper, RedisConstant};
+use Illuminate\Support\Facades\{Cache, Hash};
 
 
 class UserService extends BaseService
@@ -357,8 +359,8 @@ class UserService extends BaseService
        $user = User::query()->where('id', $userId)->first();
        $oldPassword = $input->oldPassword;
        $newPassword = $input->newPassword;
-       if ($oldPassword != $input->confirmPassword) {
-           //原密码错误
+       if ($newPassword != $input->confirmPassword) {
+           //确认密码错误
            $this->throwBusinessException(CodeResponse::USERNAME_OR_PASSWORD_ERROR, '确认密码错误');
        }
 
@@ -491,6 +493,28 @@ class UserService extends BaseService
     {
         $userList = User::query()->select()->get(['id', 'nickname']);
         return Helpers::model2Options($userList->toArray(), 'id', 'nickname');
+    }
+
+    /**
+     * 修改当前用户邮箱
+     *
+     * @param EmailBindingFormInput $input
+     * @return bool|int
+     * @throws BusinessException
+     * @author 2025/1/2 19:51
+     */
+    public function bindEmail(EmailBindingFormInput $input)
+    {
+
+        $userId = LoginService::getInstance()->userId();
+        $email = $input->email;
+        $inputVerificationCode = $input->code;
+        $key    = RedisConstant::EMAIL_VERIFICATION_CODE_PREFIX . $email;
+        $cachedVerificationCode = Cache::get($key);
+        if (!$inputVerificationCode || $inputVerificationCode != $cachedVerificationCode) {
+            throw new BusinessException(CodeResponse::VERIFY_CODE_ERROR);
+        }
+        return User::query()->where('id', $userId)->update(['email' => $email]);
     }
 }
 

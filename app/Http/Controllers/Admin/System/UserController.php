@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\System;
 
 use App\Http\Controllers\Admin\BaseController;
+use App\Inputs\Admin\System\EmailBindingForm;
 use App\Inputs\Admin\System\PasswordChangeFormInput;
 use App\Inputs\Admin\System\UserFormInput;
 use App\Inputs\Admin\System\UserPageInput;
@@ -293,5 +294,12 @@ class UserController extends BaseController
     {
         $menus = UserService::getInstance()->listUserOptions();
         return $this->success($menus);
+    }
+
+    public function bindEmail()
+    {
+        $input = EmailBindingFormInput::new();
+        $res   = UserService::getInstance()->bindEmail($input);
+        return $this->success($res);
     }
 }
