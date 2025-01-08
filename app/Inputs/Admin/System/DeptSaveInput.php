@@ -11,6 +11,7 @@ class DeptSaveInput extends PageInput
     public $parentId;
     public $status;
     public $sort;
+    public $code;
 
 
     public function rule()

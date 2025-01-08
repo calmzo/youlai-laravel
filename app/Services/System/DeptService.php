@@ -20,7 +20,7 @@ class DeptService extends BaseService
      */
     public function listDepartments(DeptInput $input, $columns = ['*'])
     {
-        $columns  = ['id', 'name', 'parent_id', 'sort', 'status', 'create_time', 'update_time'];
+        $columns  = ['id', 'name', 'parent_id', 'sort', 'status', 'create_time', 'update_time', 'code'];
         $query    = Dept::query();
         $query    = $this->getDeptQuery(
             $query,
@@ -144,7 +144,7 @@ class DeptService extends BaseService
      */
     public function getDeptForm($deptId)
     {
-        $column = ['id', 'name', 'parent_id', 'sort', 'status'];
+        $column = ['id', 'name', 'parent_id', 'sort', 'status', 'code'];
         $form   = Dept::query()->where('id', $deptId)->first($column);
         if (is_null($form)) {
             $this->throwBusinessException();
@@ -166,6 +166,7 @@ class DeptService extends BaseService
 
         $dept            = Dept::new();
         $dept->name      = $name;
+        $dept->code      = $input->code;
         $dept->parent_id = $parentId;
         $dept->tree_path = $treePath;
         $dept->sort      = $input->sort ?? 0;
@@ -213,6 +214,7 @@ class DeptService extends BaseService
         $dept->tree_path = $treePath;
         $dept->sort      = $input->sort ?? 0;
         $dept->status    = $input->status ?? 0;
+        $dept->code    = $input->code ?? '';
         $dept->name      = $name;
         $dept->update_by = LoginService::getInstance()->userId();
         $result          = $dept->save();
