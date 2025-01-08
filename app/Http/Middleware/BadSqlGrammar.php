@@ -12,7 +12,7 @@ class BadSqlGrammar
 
     public function handle(Request $request, Closure $next)
     {
-        if (!$this->isDevEnvironment()) {
+        if ($this->isDevEnvironment()) {
             if (in_array($request->method(), ['POST', 'PUT', 'DELETE'])) {
                 // 处理 PUT 请求
                 throw new ForbiddenException(CodeResponse::FORBIDDEN_OPERATION);
