@@ -53,6 +53,7 @@ class Kernel extends HttpKernel
         'admin' => [
             \App\Http\Middleware\CorsMiddleware::class,
             \App\Http\Middleware\SysLogger::class,
+            \App\Http\Middleware\BadSqlGrammar::class,
         ],
 
         'wx' => [
