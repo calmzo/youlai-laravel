@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\Token\ForbiddenException;
+use App\Services\System\LoginService;
 use App\Utils\CodeResponse;
 use Closure;
 use Illuminate\Http\Request;
@@ -22,6 +23,14 @@ class BadSqlGrammar
             return $next($request);
         }
         if ($this->isDevEnvironment()) {
+            $userId   = null;
+            $username = null;
+            // 登录请求获取用户ID，登录请求在登录成功后获取用户ID
+            $user     = LoginService::getInstance()->user();
+            $username = $user['username'] ?? '';
+            if ($username == 'root') {
+                return $next($request);
+            }
             if (in_array($request->method(), ['POST', 'PUT', 'DELETE'])) {
                 // 处理 POST PUT DELETE请求
                 throw new ForbiddenException(CodeResponse::FORBIDDEN_OPERATION);
