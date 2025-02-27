@@ -129,7 +129,7 @@ class UserExport extends BaseExport implements BaseExportInterface
 
         $row = 3;
         foreach ($list as $item) {
-            $column = 1;
+            $column = 0;
             foreach ($title as $key => $value) {
                 // 单元格内容写入
 //                $objSheet->setCellValueByColumnAndRow($column, $row, $item[$key]);
