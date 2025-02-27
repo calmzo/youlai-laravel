@@ -228,18 +228,18 @@ class UserExport extends BaseExport implements BaseExportInterface
                 ->setMarginLeft(150); // 设置边距
             $titleKey++;
         }
-        // 设置性别列的下拉单选
-        $rules = [
-            '男',
-            '女',
-            '未知'
-        ];
-        $validation = $objSheet->getCell('C3')->getDataValidation();
-        $validation->setType(DataValidation::TYPE_LIST);
-        $validation->setFormula1(implode(',', $rules)); // 设置下拉列表的选项
-        $validation->setShowDropDown(TRUE); // 显示下拉箭头
-        $validation->setShowInputMessage(TRUE);
-        $validation->setShowErrorMessage(TRUE);
+//        // 设置性别列的下拉单选
+//        $rules = [
+//            '男',
+//            '女',
+//            '未知'
+//        ];
+//        $validation = $objSheet->getCell('C3')->getDataValidation();
+//        $validation->setType(DataValidation::TYPE_LIST);
+//        $validation->setFormula1(implode(',', $rules)); // 设置下拉列表的选项
+//        $validation->setShowDropDown(TRUE); // 显示下拉箭头
+//        $validation->setShowInputMessage(TRUE);
+//        $validation->setShowErrorMessage(TRUE);
 
         //锁定表头
         $spreadsheet->getSheet(0)->freezePane('A3');
