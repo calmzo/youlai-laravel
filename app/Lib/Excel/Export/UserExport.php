@@ -2,6 +2,7 @@
 
 namespace App\Lib\Excel\Export;
 
+use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -208,6 +209,23 @@ class UserExport extends BaseExport implements BaseExportInterface
         $objSheet->getComment('A2')->getText()->createTextRun('必填且唯一')->getFont()->setBold(true)->setColor( new \PhpOffice\PhpSpreadsheet\Style\Color( \PhpOffice\PhpSpreadsheet\Style\Color::COLOR_DARKBLUE) );
         $objSheet->getComment('D2')->getText()->createTextRun('手机号格式')->getFont()->setBold(true)->setColor( new \PhpOffice\PhpSpreadsheet\Style\Color( \PhpOffice\PhpSpreadsheet\Style\Color::COLOR_DARKBLUE) );
         $objSheet->getComment('F2')->getText()->createTextRun("角色编码，从角色管理页面查询，用,隔开 例如GUEST,ADMIN")->getFont()->setBold(true)->setColor( new \PhpOffice\PhpSpreadsheet\Style\Color( \PhpOffice\PhpSpreadsheet\Style\Color::COLOR_DARKBLUE) );
+
+        // 设置性别列的下拉单选
+        $rules = [
+            '男',
+            '女',
+            '未知'
+        ];
+
+        $validation = $objSheet->getCell('C2')->getDataValidation();
+        $validation->setType(DataValidation::TYPE_LIST);
+        $validation->setFormula1(implode(',', $rules)); // 设置下拉列表的选项
+        $validation->setShowDropDown(TRUE); // 显示下拉箭头
+        $validation->setShowInputMessage(TRUE);
+        $validation->setShowErrorMessage(TRUE);
+        $validation->setShowDropDown(TRUE); // 确保下拉菜单显示
+
+
         //标题栏
         $titleKey = 0;
         foreach ($title as $titleVal) {
@@ -221,8 +239,8 @@ class UserExport extends BaseExport implements BaseExportInterface
             $objSheet->setCellValue($this->columns[$titleKey] . '2', $titleVal);
             // 设置注释的大小和位置
             $objSheet->getComment($this->columns[$titleKey] . '2')
-                ->setWidth(100) // 设置宽度
-                ->setHeight(50) // 设置高度
+                ->setWidth(200) // 设置宽度
+                ->setHeight(100) // 设置高度
                 ->setMarginLeft(150); // 设置边距
             $titleKey++;
         }
