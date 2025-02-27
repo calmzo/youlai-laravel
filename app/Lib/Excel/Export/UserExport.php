@@ -261,7 +261,7 @@ class UserExport extends BaseExport implements BaseExportInterface
             ],
 
         ];
-        $spreadsheet->getSheet(0)->getStyle('A1:' . "{$this->columns[$titleKey]}{$row}")->applyFromArray($styleArray);
+        $spreadsheet->getSheet(0)->getStyle('A1:' . "{$this->columns[$titleKey]}3")->applyFromArray($styleArray);
         //下载
         $this->downloadExcel($spreadsheet, $fileName, 'Xlsx');
     }
