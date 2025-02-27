@@ -122,7 +122,8 @@ class UserExport extends BaseExport implements BaseExportInterface
             $spreadsheet->getActiveSheet()->getStyle($this->columns[$titleKey] . '2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
             //表头背景
             $spreadsheet->getActiveSheet()->getStyle($this->columns[$titleKey] . '2')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFEFB9');
-            $objSheet->setCellValueByColumnAndRow($titleKey + 1, 2, $titleVal);
+//            $objSheet->setCellValueByColumnAndRow($titleKey + 1, 2, $titleVal);
+            $objSheet->setCellValue($this->columns[$titleKey] . '2', $titleVal);
             $titleKey++;
         }
 
@@ -131,7 +132,8 @@ class UserExport extends BaseExport implements BaseExportInterface
             $column = 1;
             foreach ($title as $key => $value) {
                 // 单元格内容写入
-                $objSheet->setCellValueByColumnAndRow($column, $row, $item[$key]);
+//                $objSheet->setCellValueByColumnAndRow($column, $row, $item[$key]);
+                $objSheet->setCellValue($this->columns[$column] . $row, $item[$key]);
                 $column++;
             }
             $row++;
