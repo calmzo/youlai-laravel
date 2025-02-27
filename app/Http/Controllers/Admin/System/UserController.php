@@ -70,9 +70,6 @@ class UserController extends BaseController
         $deptId = $request->input('deptId');
         $file = $request->file('file');
         $res = UserService::getInstance()->importUsers($deptId, $file);
-        if ($res) {
-            return $this->fail(CodeResponse::FAIL, implode('</br>', $res));
-        }
         return $this->success($res);
     }
 
