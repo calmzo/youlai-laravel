@@ -9,6 +9,7 @@ use App\Inputs\Admin\System\UserFormInput;
 use App\Inputs\Admin\System\UserPageInput;
 use App\Inputs\Admin\System\UserProfileFormInput;
 use App\Services\System\UserService;
+use App\Utils\CodeResponse;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
@@ -69,6 +70,9 @@ class UserController extends BaseController
         $deptId = $request->input('deptId');
         $file = $request->file('file');
         $res = UserService::getInstance()->importUsers($deptId, $file);
+        if ($res) {
+            return $this->fail(CodeResponse::FAIL, implode('</br>', $res));
+        }
         return $this->success($res);
     }
 
