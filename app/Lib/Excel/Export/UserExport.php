@@ -234,8 +234,7 @@ class UserExport extends BaseExport implements BaseExportInterface
             '女',
             '未知'
         ];
-        $cellRange = 'C3:C100';
-        $validation = $objSheet->getCell($cellRange)->getDataValidation();
+        $validation = $objSheet->getCell('C3')->getDataValidation();
         $validation->setType(DataValidation::TYPE_LIST);
         $validation->setFormula1(implode(',', $rules)); // 设置下拉列表的选项
         $validation->setShowDropDown(TRUE); // 显示下拉箭头
