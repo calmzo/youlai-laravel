@@ -57,12 +57,12 @@ class RateLimit
 
     /**
      *
-     * 确认是否限流方法
-     * 默认情况下：限制同一个IP的QPS最大为10,可以通过修改系统配置进行调整
-     * 这里也可以进行扩展，比如redis记录同一个ip每天出发限流的上限次数，记录在redis中，达到某个阈值后，进行永久封禁这个ip     *
+     * 判断 IP 是否触发限流
+     * 默认限制同一 IP 每秒最多请求 10 次，可通过系统配置调整。
+     * 如果系统未配置限流阈值，默认跳过限流。
      *
-     * @param $ip
-     * @return bool
+     * @param $ip IP 地址
+     * @return bool 是否限流：true 表示限流；false 表示未限流
      * @author 2024/8/20 15:00
      */
     public function checkRepeatIp($ip)
@@ -78,12 +78,11 @@ class RateLimit
         $time        = 1;//锁过期时间 每秒QPS
         $limit       = 20;//QPS，超过加入黑名单
         $limitConfig = ConfigService::getInstance()->getSystemConfig($ip_qps_threshold_limit_key);
-
-        if ($limitConfig) {
-            $limit       = $limitConfig;
-        } else {
-            Log::channel('rateLimit')->warning(sprintf('[rateLimit]系统配置中未配置IP请求限制QPS阈值配置,使用默认值:【%s】,请检查配置项:【%s】', $limit, RedisConstant::IP_QPS_THRESHOLD_LIMIT_KEY));
+        if (!$limitConfig) {
+            //系统未配置限流阈值，跳过限流
+            return false;
         }
+        $limit       = $limitConfig;
 
         $frequentLock = $user_frequent_request_lock_key . $ip;
         $isFrequent   = $redis->get($frequentLock);
