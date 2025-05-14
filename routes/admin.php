@@ -94,7 +94,7 @@ Route::prefix('system')->group(function () {
     });
 
     //字典管理
-    Route::prefix('dict')->group(function () {
+    Route::prefix('dicts')->group(function () {
         Route::get('page', [DictController::class, 'getDictPage']); //字典分页列表
         Route::get('list', [DictController::class, 'getAllDictWithData']); //所有字典列表
         Route::get('{id}/form', [DictController::class, 'getDictForm']); //字典数据表单数据
